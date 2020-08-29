@@ -66,6 +66,7 @@ namespace AutoClicker
         /// <param name="e"></param>
         private void btn_Launch_Click(object sender, EventArgs e)
         {
+            //TODO : Ajouter un repeteur d'action
             if (isRunning)
             {
                 isRunning = false;
