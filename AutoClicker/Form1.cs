@@ -22,6 +22,9 @@ namespace AutoClicker
         private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
         private const int MOUSEEVENTF_RIGHTUP = 0x10;
 
+        private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
+        private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
+
         List<CustomAction> listActions;
         Cursor Cursor;
 
@@ -31,6 +34,17 @@ namespace AutoClicker
             this.KeyPreview = true;
             InitializeComponent();
             listActions = new List<CustomAction>();
+            Lbl_Info.Text =
+@"The button Recording launch and stop the recording of your click
+The Launch button is use to execute your record,
+
+Commande : 
+Shift Key : Left Click
+Ctrl Key : Right Click
+Alt Key : Middle Click
+
+D : Prompt a dialog to define a delay.
+";
         }
 
         bool isRecording = false;
@@ -95,11 +109,15 @@ namespace AutoClicker
                 MoveCursor(action.posX, action.posY);
                 if (action.key == Keys.ShiftKey)
                 {
-                    DoMouseClick(false);
+                    DoMouseClick(ClickValue.LeftClick);
                 }
                 if (action.key == Keys.ControlKey)
                 {
-                    DoMouseClick(true);
+                    DoMouseClick(ClickValue.RightClick);
+                }
+                if (action.key == Keys.Menu) // Alt
+                {
+                    DoMouseClick(ClickValue.MiddleClick);
                 }
                 if (action.key == Keys.D) // ajout delai
                 {
@@ -128,19 +146,27 @@ namespace AutoClicker
             Val_PosX.Text = posx.ToString();
             Val_PosY.Text = posy.ToString();
         }
-        public void DoMouseClick(bool rightClick)
+        public void DoMouseClick(ClickValue cv)
         {
             //Call the imported function with the cursor's current position
             uint X = (uint)Cursor.Position.X;
             uint Y = (uint)Cursor.Position.Y;
-            if (rightClick)
+
+            switch (cv)
             {
-                mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, X, Y, 0, 0);
-            }
-            else
-            {
+                case ClickValue.LeftClick:
                 mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
+                    break;
+                case ClickValue.MiddleClick:
+                    mouse_event(MOUSEEVENTF_MIDDLEDOWN | MOUSEEVENTF_MIDDLEUP, X, Y, 0, 0);
+                    break;
+                case ClickValue.RightClick:
+                mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, X, Y, 0, 0);
+                    break;
+                default:
+                    break;
             }
+
         }
         public bool StopProgramme()
         {
@@ -163,15 +189,20 @@ namespace AutoClicker
             act.posX = Cursor.Position.X;
             act.posY = Cursor.Position.Y;
 
-            if (e.KeyCode == Keys.ShiftKey)
+            if (e.KeyCode == Keys.ShiftKey || e.KeyCode == Keys.LShiftKey)
             {
                 act.key = Keys.ShiftKey;
                 act.Name = "Click";
             }
-            if (e.KeyCode == Keys.ControlKey)
+            if (e.KeyCode == Keys.ControlKey || e.KeyCode == Keys.LControlKey)
             {
                 act.key = Keys.ControlKey;
                 act.Name = "Right Click";
+            }
+            if (e.KeyCode == Keys.Menu || e.KeyCode == Keys.LMenu)
+            {
+                act.key = Keys.Menu;
+                act.Name = "Middle Click";
             }
             if (e.KeyCode == Keys.D)
             {
@@ -230,5 +261,13 @@ namespace AutoClicker
                 return prompt.ShowDialog() == DialogResult.OK ? (int)numInput.Value : 0;
             }
         }
+
+        public enum ClickValue
+        {
+            LeftClick,
+            MiddleClick,
+            RightClick,
+        }
+
     }
 }

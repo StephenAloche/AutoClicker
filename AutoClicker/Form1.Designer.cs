@@ -41,6 +41,7 @@
             this.Action = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Pos_X = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Pos_Y = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Lbl_Info = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_Record
@@ -144,11 +145,21 @@
             // 
             this.Pos_Y.Text = "Pos Y";
             // 
+            // Lbl_Info
+            // 
+            this.Lbl_Info.AutoSize = true;
+            this.Lbl_Info.Location = new System.Drawing.Point(251, 41);
+            this.Lbl_Info.Name = "Lbl_Info";
+            this.Lbl_Info.Size = new System.Drawing.Size(35, 13);
+            this.Lbl_Info.TabIndex = 8;
+            this.Lbl_Info.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Lbl_Info);
             this.Controls.Add(this.Lv_Actions);
             this.Controls.Add(this.Lbl_stopped);
             this.Controls.Add(this.Val_PosY);
@@ -180,6 +191,7 @@
         private System.Windows.Forms.ColumnHeader Action;
         private System.Windows.Forms.ColumnHeader Pos_X;
         private System.Windows.Forms.ColumnHeader Pos_Y;
+        private System.Windows.Forms.Label Lbl_Info;
     }
 }
 
