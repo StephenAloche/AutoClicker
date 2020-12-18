@@ -2,7 +2,7 @@
 
 AutoCliker is a small application, allowing you to recorde a clicking process and execute it multiples time.
 
-Warning ! : For now this application was meant to be use ponctually and many very usefull featurs are missing. Read the Roadmap for more informations.
+Warning !  For now this application was meant to be use occasionally and many very usefull featurs are missing. Read the Roadmap for more informations.
 
 ## Installation
 
@@ -10,8 +10,8 @@ No instalattion needed, you juste have to launch the .exe.
 
 
 ## Roadmap
-Ther next modification should be to :
-Save process to reuse them later without re-recording them.
+Ther next modification should be to :  
+Save process to reuse them later without re-recording them.  
 Making it possible to remove an action from the list.
 
 ## Project status
